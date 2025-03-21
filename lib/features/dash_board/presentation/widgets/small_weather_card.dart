@@ -1,13 +1,14 @@
 import 'package:demo_golden_owl/common/constant/color.dart';
+import 'package:demo_golden_owl/features/dash_board/domain/entities/weather_entity.dart';
 import 'package:flutter/material.dart';
 
 class SmallWeatherCard extends StatelessWidget {
-  const SmallWeatherCard({super.key});
+  final WeatherEntity weather;
+  const SmallWeatherCard({super.key, required this.weather});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
       padding: EdgeInsets.symmetric(horizontal: 8,vertical: 8),
       decoration: BoxDecoration(
         color: AppColors.secondaryColor,
@@ -18,15 +19,15 @@ class SmallWeatherCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("(2023-06-19)",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-            SizedBox(height: 20,),
-            Text("Image"),
+            Text("(${weather.date})",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
             SizedBox(height: 12,),
-            Text("Temp: 18.71"),
+            Image(image: NetworkImage(weather.iconUrl)),
+            SizedBox(height: 6,),
+            Text("Temp: ${weather.temperature}"),
             SizedBox(height: 12,),
-            Text("Wind: 4.31M/S"),
+            Text("Wind: ${weather.windSpeed}"),
             SizedBox(height: 12,),
-            Text("Humidity: 76%"),
+            Text("Humidity: ${weather.humidity}"),
           ],
         ),
       ),
