@@ -1,5 +1,7 @@
 import 'package:demo_golden_owl/common/constant/color.dart';
+import 'package:demo_golden_owl/features/dash_board/domain/entities/weather_forecast_entity.dart';
 import 'package:demo_golden_owl/features/dash_board/domain/use_cases/get_weather_usecase.dart';
+import 'package:demo_golden_owl/features/dash_board/presentation/manager/history_cubit.dart';
 import 'package:demo_golden_owl/features/dash_board/presentation/manager/search_weather_state_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +23,13 @@ class _InputInformationState extends State<InputInformation> {
     );
   }
 
+  _onSearchMyCurrentWeather(BuildContext context) {
+    context.read<SearchWeatherStateCubit>().onGetWeather(
+      useCase: GetWeatherUseCase(),
+      params: 'auto:ip',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,11 +39,13 @@ class _InputInformationState extends State<InputInformation> {
         SizedBox(height: 12),
         _cityField(),
         SizedBox(height: 12),
+        _listHistory(),
+        SizedBox(height: 12),
         _searchButton(context),
         SizedBox(height: 12),
         _orDivider(),
         SizedBox(height: 12),
-        _useCurrentLocationButton(),
+        _useCurrentLocationButton(context),
       ],
     );
   }
@@ -84,16 +95,48 @@ class _InputInformationState extends State<InputInformation> {
     );
   }
 
-  Widget _useCurrentLocationButton() {
+  Widget _useCurrentLocationButton(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.secondaryColor,
       ),
-      onPressed: () {},
+      onPressed: () => _onSearchMyCurrentWeather(context),
       child: Text(
         'Use Current Location',
         style: TextStyle(color: Colors.white),
       ),
+    );
+  }
+
+  Widget _listHistory() {
+    return BlocBuilder<HistoryCubit, List<WeatherForecastEntity>>(
+      builder: (BuildContext context, state) {
+        if (state.isNotEmpty) {
+          return Wrap(
+            spacing: 8.0,
+            runSpacing: 8.0,
+            children:
+                state.map((item) {
+                  return GestureDetector(
+                    onTap: () {
+                      context.read<SearchWeatherStateCubit>().onGetFromHistory(
+                        item,
+                      );
+                    },
+                    child: Chip(
+                      label: Text(item.location),
+                      backgroundColor: Colors.blue.shade100,
+                      deleteIcon: Icon(Icons.close, size: 16),
+                      onDeleted: () {
+                        context.read<HistoryCubit>().removeSearchResult(item);
+                      },
+                    ),
+                  );
+                }).toList(),
+          );
+        }
+        return SizedBox();
+      },
     );
   }
 }

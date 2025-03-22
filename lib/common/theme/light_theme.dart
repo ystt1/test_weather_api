@@ -55,7 +55,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4),
           ),
-            minimumSize: Size(double.infinity, 48)
+            minimumSize: Size(double.infinity, 55)
         ),
       ),
     );

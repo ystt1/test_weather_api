@@ -1,4 +1,6 @@
+import 'package:demo_golden_owl/features/dash_board/presentation/manager/history_cubit.dart';
 import 'package:demo_golden_owl/features/dash_board/presentation/manager/search_weather_state_cubit.dart';
+import 'package:demo_golden_owl/features/dash_board/presentation/manager/see_more_cubit.dart';
 import 'package:demo_golden_owl/features/dash_board/presentation/widgets/input_information.dart';
 import 'package:demo_golden_owl/features/dash_board/presentation/widgets/weather_information.dart';
 import 'package:demo_golden_owl/responsive.dart';
@@ -19,29 +21,38 @@ class DashBoard extends StatelessWidget {
           ),
         ),
       ),
-      body: BlocProvider(
-        create: (BuildContext context) => SearchWeatherStateCubit(),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 32),
-          child:
-              Responsive.isDesktop(context)
-                  ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(flex: 1, child: InputInformation()),
-                      SizedBox(width: 32),
-                      Expanded(flex: 2, child: WeatherInformation()),
-                    ],
-                  )
-                  : SingleChildScrollView(
-                    child: Column(
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (BuildContext context) => SearchWeatherStateCubit(),
+          ),
+          BlocProvider(create: (BuildContext context) => SeeMoreCubit()),
+          BlocProvider(
+            create: (BuildContext context) => HistoryCubit()..loadHistory(),
+          ),
+        ],
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+            child:
+                Responsive.isDesktop(context)
+                    ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(flex: 1, child: InputInformation()),
+                        SizedBox(width: 32),
+                        Expanded(flex: 2, child: WeatherInformation()),
+                      ],
+                    )
+                    : Column(
                       children: [
                         InputInformation(),
                         const SizedBox(height: 16),
                         WeatherInformation(),
                       ],
                     ),
-                  ),
+          ),
         ),
       ),
     );

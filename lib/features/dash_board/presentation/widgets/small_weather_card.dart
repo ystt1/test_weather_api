@@ -1,9 +1,11 @@
 import 'package:demo_golden_owl/common/constant/color.dart';
+import 'package:demo_golden_owl/features/dash_board/data/models/weather_next_day_model.dart';
 import 'package:demo_golden_owl/features/dash_board/domain/entities/weather_entity.dart';
+import 'package:demo_golden_owl/features/dash_board/domain/entities/weather_next_day_entity.dart';
 import 'package:flutter/material.dart';
 
 class SmallWeatherCard extends StatelessWidget {
-  final WeatherEntity weather;
+  final WeatherNextDayEntity weather;
   const SmallWeatherCard({super.key, required this.weather});
 
   @override
@@ -23,7 +25,7 @@ class SmallWeatherCard extends StatelessWidget {
             SizedBox(height: 12,),
             Image(image: NetworkImage(weather.iconUrl)),
             SizedBox(height: 6,),
-            Text("Temp: ${weather.temperature}"),
+            Text("Temp: ${weather.temp}"),
             SizedBox(height: 12,),
             Text("Wind: ${weather.windSpeed}"),
             SizedBox(height: 12,),
