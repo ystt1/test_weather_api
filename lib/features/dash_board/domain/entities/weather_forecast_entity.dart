@@ -7,13 +7,15 @@ class WeatherForecastEntity {
   final Duration gmtOffset;
   final List<WeatherTodayEntity> today;
   final List<WeatherNextDayEntity> nextDays;
+  final String dayGet;
 
-  WeatherForecastEntity({required this.today, required this.nextDays,required this.location,required this.gmtOffset});
+  WeatherForecastEntity({required this.today, required this.nextDays,required this.location,required this.gmtOffset,required this.dayGet});
 
 
   Map<String, dynamic> toJson() {
     return {
       'location': location,
+      'dayGet': dayGet,
       'gmtOffset': gmtOffset.inSeconds, // Lưu offset theo giây
       'today': today.map((e) => e.toJson()).toList(),
       'nextDays': nextDays.map((e) => e.toJson()).toList(),
@@ -23,6 +25,7 @@ class WeatherForecastEntity {
 
   factory WeatherForecastEntity.fromJson(Map<String, dynamic> json) {
     return WeatherForecastEntity(
+      dayGet: json['dayGet'],
       location: json['location'],
       gmtOffset: Duration(seconds: json['gmtOffset']),
       today: (json['today'] as List)

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
+
+      fontFamily: 'Rubik',
       scaffoldBackgroundColor: AppColors.backgroundColor,
       primaryColor: AppColors.primaryColor,
 
@@ -13,21 +15,21 @@ class AppTheme {
       ),
 
       textTheme: const TextTheme(
-        displayLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        displayMedium: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        displaySmall: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        headlineLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        headlineMedium: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        headlineSmall: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        titleLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        titleMedium: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        titleSmall: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        bodyLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        bodyMedium: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        bodySmall: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        labelLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        labelMedium: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        labelSmall: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        displayLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        displayMedium: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        displaySmall: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        headlineLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        headlineMedium: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        headlineSmall: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        titleLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        titleMedium: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        titleSmall: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        bodyLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        bodyMedium: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        bodySmall: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        labelLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        labelMedium: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+        labelSmall: TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
       ),
 
 

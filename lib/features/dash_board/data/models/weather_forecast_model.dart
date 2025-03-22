@@ -9,22 +9,25 @@ class WeatherForecastModel {
   final Duration gmtOffset;
   final List<WeatherTodayModel> today;
   final List<WeatherNextDayModel> nextDays;
+  final String timeGet;
 
   WeatherForecastModel({
     required this.today,
     required this.nextDays,
     required this.location,
-    required this.gmtOffset
+    required this.gmtOffset,
+    required this.timeGet,
   });
 
   factory WeatherForecastModel.fromJson(Map<String, dynamic> json) {
     tz.initializeTimeZones();
     List<dynamic> forecastDays = json["forecast"]["forecastday"];
-    String location = json['location']['name'];
-    String tzId=json['location']['tz_id'];
-    final now = tz.TZDateTime.now(tz.getLocation(tzId));
-    Duration gmtOffset = now.timeZoneOffset;
+    String tzId = json['location']['tz_id'];
 
+    final now = tz.TZDateTime.now(tz.getLocation(tzId));
+    String location = json['location']['name'];
+    Duration gmtOffset = now.timeZoneOffset;
+    final timeGet = json['location']['localtime'];
 
     List<WeatherTodayModel> today =
         (forecastDays[0]["hour"] as List)
@@ -39,6 +42,7 @@ class WeatherForecastModel {
       today: today,
       nextDays: nextDays,
       location: location,
+      timeGet: timeGet,
     );
   }
 }
@@ -48,7 +52,8 @@ extension WeatherForecastModelToEntity on WeatherForecastModel {
     return WeatherForecastEntity(
       today: today.map((e) => e.toEntity()).toList(),
       nextDays: nextDays.map((e) => e.toEntity()).toList(),
-      location: location, gmtOffset: gmtOffset,
+      location: location,
+      gmtOffset: gmtOffset, dayGet: timeGet,
     );
   }
 }

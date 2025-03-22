@@ -36,4 +36,11 @@ class AppHelper {
       return null;
     }
   }
+
+  static bool isNewDay(WeatherForecastEntity forecast) {
+    DateTime oldTime = DateFormat('yyyy-MM-dd HH:mm').parse(forecast.dayGet);
+    DateTime now = DateTime.now().toUtc().add(Duration(hours: forecast.gmtOffset.inHours));
+    return oldTime.year != now.year || oldTime.month != now.month || oldTime.day != now.day;
+  }
+
 }
