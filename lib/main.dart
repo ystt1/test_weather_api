@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.lightTheme,
+      debugShowCheckedModeBanner: false,
       home: DashBoard(),
     );
   }
