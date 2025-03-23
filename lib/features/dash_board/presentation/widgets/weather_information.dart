@@ -46,9 +46,17 @@ class _WeatherInformationState extends State<WeatherInformation> {
       return _loadData(state.weathers, context);
     }
     if (state is SearchWeatherInitialState) {
-      if (context.watch<HistoryCubit>().state.isNotEmpty) {
-        return _loadData(context.watch<HistoryCubit>().state[0], context);
+
+      if(context.watch<HistoryCubit>().state == null)
+        {
+
+        }
+      else if (context.watch<HistoryCubit>().state != null &&
+          context.watch<HistoryCubit>().state!.isNotEmpty) {
+        print("a");
+        return _loadData(context.watch<HistoryCubit>().state![0], context);
       } else {
+        print('b');
         context.read<SearchWeatherStateCubit>().onGetWeather(
           useCase: GetWeatherUseCase(),
           params: 'auto:ip',

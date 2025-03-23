@@ -109,9 +109,9 @@ class _InputInformationState extends State<InputInformation> {
   }
 
   Widget _listHistory() {
-    return BlocBuilder<HistoryCubit, List<WeatherForecastEntity>>(
+    return BlocBuilder<HistoryCubit, List<WeatherForecastEntity>?>(
       builder: (BuildContext context, state) {
-        if (state.isNotEmpty) {
+        if (state!=null && state.isNotEmpty) {
           return Wrap(
             spacing: 8.0,
             runSpacing: 8.0,

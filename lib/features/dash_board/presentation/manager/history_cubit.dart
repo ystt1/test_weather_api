@@ -3,8 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:demo_golden_owl/features/dash_board/domain/entities/weather_forecast_entity.dart';
 
-class HistoryCubit extends Cubit<List<WeatherForecastEntity>> {
-  HistoryCubit() : super([]);
+class HistoryCubit extends Cubit<List<WeatherForecastEntity>?> {
+  HistoryCubit() : super(null){
+    loadHistory();
+  }
+
+
 
   Future<void> loadHistory() async {
     final prefs = await SharedPreferences.getInstance();
@@ -19,7 +23,7 @@ class HistoryCubit extends Cubit<List<WeatherForecastEntity>> {
 
   Future<void> addSearchResult(WeatherForecastEntity weather) async {
     final prefs = await SharedPreferences.getInstance();
-    List<WeatherForecastEntity> history = List.from(state);
+    List<WeatherForecastEntity> history = List.from(state!);
     history.removeWhere((item) => item.location == weather.location);
     history.insert(0, weather);
     if (history.length > 10) {
@@ -35,7 +39,7 @@ class HistoryCubit extends Cubit<List<WeatherForecastEntity>> {
 
   Future<void> removeSearchResult(WeatherForecastEntity weather) async {
     final prefs = await SharedPreferences.getInstance();
-    List<WeatherForecastEntity> history = List.from(state);
+    List<WeatherForecastEntity> history = List.from(state!);
 
     history.removeWhere((item) => item.location == weather.location);
 
