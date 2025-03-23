@@ -1,3 +1,4 @@
+import 'package:demo_golden_owl/common/bloc/button/button_state_cubit.dart';
 import 'package:demo_golden_owl/features/dash_board/presentation/manager/history_cubit.dart';
 import 'package:demo_golden_owl/features/dash_board/presentation/manager/search_weather_state_cubit.dart';
 import 'package:demo_golden_owl/features/dash_board/presentation/manager/see_more_cubit.dart';
@@ -29,6 +30,9 @@ class DashBoard extends StatelessWidget {
           BlocProvider(create: (BuildContext context) => SeeMoreCubit()),
           BlocProvider(
             create: (BuildContext context) => HistoryCubit()..loadHistory(),
+          ),
+          BlocProvider(
+            create: (BuildContext context) => ButtonStateCubit(),
           ),
         ],
         child: SingleChildScrollView(

@@ -25,14 +25,16 @@ class WeatherApiServiceImp extends WeatherApiService {
         '$baseUrl/forecast.json?q=$params&days=13&key=$apiKey',
       );
       final response = await http.get(uri);
-      final data = json.decode(response.body);
+
+      var utf8Body = utf8.decode(response.bodyBytes);
+      var jsonData = jsonDecode(utf8Body);
       if (response.statusCode == 200) {
-        WeatherForecastModel weatherList = WeatherForecastModel.fromJson(data);
+        WeatherForecastModel weatherList = WeatherForecastModel.fromJson(jsonData);
 
         return Right(weatherList);
       }
 
-      return Left(data['error']['message']);
+      return Left(jsonData['error']['message']);
     } catch (e) {
       print(e.toString());
       return Left(e.toString());
@@ -42,7 +44,7 @@ class WeatherApiServiceImp extends WeatherApiService {
   Future<Either> getMyLocation() //weather-api sometime get wrong location
   async {
     try {
-      final uri = Uri.parse('http://ip-api.com/json/');
+      final uri = Uri.parse('https://ipinfo.io/?token=b0370cae812ad1');
       final response = await http.get(uri);
       final data = json.decode(response.body);
       if (response.statusCode == 200) {

@@ -21,7 +21,7 @@ class SmallWeatherCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("(${weather.date})",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+            Text("(${weather.date})",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
             SizedBox(height: 12,),
             Image(image: NetworkImage(weather.iconUrl)),
             SizedBox(height: 6,),

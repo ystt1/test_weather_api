@@ -22,11 +22,12 @@ class SearchWeatherStateCubit extends Cubit<SearchWeatherState> {
   }
 
   Future<void> onGetFromHistory(WeatherForecastEntity weather) async {
-    if(AppHelper.isNewDay(weather))
-      {
-        onGetWeather(useCase: GetWeatherUseCase(),params: weather.location);
-      }
-    else {
+    if (AppHelper.isNewDay(weather)) {
+      onGetWeather(
+        useCase: GetWeatherUseCase(),
+        params: weather.location,
+      ); //if this location go to next day, app will call new data
+    } else {
       emit(SearchWeatherSuccessState(weathers: weather));
     }
   }
