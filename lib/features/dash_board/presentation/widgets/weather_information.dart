@@ -14,9 +14,14 @@ import '../manager/search_weather_state_cubit.dart';
 import '../manager/see_more_cubit.dart';
 import 'big_weather_card.dart';
 
-class WeatherInformation extends StatelessWidget {
+class WeatherInformation extends StatefulWidget {
   const WeatherInformation({super.key});
 
+  @override
+  State<WeatherInformation> createState() => _WeatherInformationState();
+}
+
+class _WeatherInformationState extends State<WeatherInformation> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchWeatherStateCubit, SearchWeatherState>(

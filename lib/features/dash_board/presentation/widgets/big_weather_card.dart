@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:demo_golden_owl/common/constant/color.dart';
+import 'package:demo_golden_owl/features/dash_board/domain/use_cases/get_weather_usecase.dart';
+import 'package:demo_golden_owl/features/dash_board/presentation/manager/search_weather_state_cubit.dart';
 import 'package:demo_golden_owl/responsive.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../common/helper/app_helper.dart';
@@ -15,7 +18,7 @@ class BigWeatherCard extends StatefulWidget {
   const BigWeatherCard({super.key, required this.weather});
 
   @override
-  _BigWeatherCardState createState() => _BigWeatherCardState();
+  State<BigWeatherCard> createState() => _BigWeatherCardState();
 }
 
 class _BigWeatherCardState extends State<BigWeatherCard> {
@@ -33,6 +36,12 @@ class _BigWeatherCardState extends State<BigWeatherCard> {
       if (mounted) {
         setState(() {
           now = AppHelper.getCurrentTime(widget.weather);
+          if (AppHelper.isNewDay(widget.weather)) {
+            context.read<SearchWeatherStateCubit>().onGetWeather(
+              useCase: GetWeatherUseCase(),
+              params: widget.weather.location,
+            );
+          }
         });
       } else {
         timer.cancel();

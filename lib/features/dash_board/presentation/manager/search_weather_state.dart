@@ -1,4 +1,4 @@
-import 'package:demo_golden_owl/features/dash_board/domain/entities/weather_entity.dart';
+
 import 'package:demo_golden_owl/features/dash_board/domain/entities/weather_forecast_entity.dart';
 
 abstract class SearchWeatherState{}

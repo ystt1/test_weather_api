@@ -1,6 +1,5 @@
 import 'package:demo_golden_owl/common/constant/color.dart';
-import 'package:demo_golden_owl/features/dash_board/data/models/weather_next_day_model.dart';
-import 'package:demo_golden_owl/features/dash_board/domain/entities/weather_entity.dart';
+
 import 'package:demo_golden_owl/features/dash_board/domain/entities/weather_next_day_entity.dart';
 import 'package:flutter/material.dart';
 

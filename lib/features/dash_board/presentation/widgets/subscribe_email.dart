@@ -15,14 +15,14 @@ class SubscribeEmail extends StatefulWidget {
   const SubscribeEmail({super.key, required this.location});
 
   @override
-  _SubscribeEmailState createState() => _SubscribeEmailState();
+  State<SubscribeEmail> createState() => _SubscribeEmailState();
 }
 
 class _SubscribeEmailState extends State<SubscribeEmail> {
   final TextEditingController _emailController = TextEditingController();
   final _emailFormKey = GlobalKey<FormState>();
-  bool _isCodeSent = false;
-  List<TextEditingController> _codeControllers = List.generate(
+
+  final List<TextEditingController> _codeControllers = List.generate(
     5,
     (index) => TextEditingController(),
   );
@@ -31,7 +31,6 @@ class _SubscribeEmailState extends State<SubscribeEmail> {
   void _sendCode() {
     if (_emailFormKey.currentState!.validate()) {
       setState(() {
-        _isCodeSent = true;
         _countdown = 60;
       });
       _startCountdown();
@@ -73,7 +72,6 @@ class _SubscribeEmailState extends State<SubscribeEmail> {
       listener: (context, state) {
         if (state is ButtonFailureState) {
           setState(() {
-            _isCodeSent = false;
             _countdown = 0;
           });
         }
@@ -83,7 +81,10 @@ class _SubscribeEmailState extends State<SubscribeEmail> {
               context,
             ).showSnackBar(SnackBar(content: Text("Subscribe success")));
             setState(() {
-              _codeControllers.map((e) => e.clear());
+              for (var controller in _codeControllers) {
+                controller.clear();
+              }
+              _countdown = 0;
               _emailController.clear();
             });
           }
@@ -95,6 +96,7 @@ class _SubscribeEmailState extends State<SubscribeEmail> {
           children: [
             Responsive.isMobile(context)
                 ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _emailField(),
                     SizedBox(height: 8),

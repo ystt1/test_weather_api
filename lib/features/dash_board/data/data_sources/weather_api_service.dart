@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:demo_golden_owl/core/constants/key.dart';
 import 'package:demo_golden_owl/core/constants/url.dart';
 import 'package:demo_golden_owl/features/dash_board/data/models/weather_forecast_model.dart';
-import 'package:demo_golden_owl/features/dash_board/data/models/weather_model.dart';
+
 import 'package:http/http.dart' as http;
 
 abstract class WeatherApiService {
@@ -36,7 +36,7 @@ class WeatherApiServiceImp extends WeatherApiService {
 
       return Left(jsonData['error']['message']);
     } catch (e) {
-      print(e.toString());
+
       return Left(e.toString());
     }
   }
@@ -44,7 +44,7 @@ class WeatherApiServiceImp extends WeatherApiService {
   Future<Either> getMyLocation() //weather-api sometime get wrong location
   async {
     try {
-      final uri = Uri.parse('https://ipinfo.io/?token=b0370cae812ad1');
+      final uri = Uri.parse('https://ipinfo.io/?token=$token');
       final response = await http.get(uri);
       final data = json.decode(response.body);
       if (response.statusCode == 200) {
